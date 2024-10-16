@@ -1,0 +1,85 @@
+[
+    {
+        "id":1,
+        "hijo":[
+            {
+                "id":11,
+                "padre":3,
+                "titulo":"Onceavo elemento",
+                "fechaInicio":"2024-01-01",
+                "fechaFin":"2024-02-03"
+            },            
+            {
+                "id":3,
+                "hijo":[
+                    {
+                        "id":4,
+                        "hijo":[],
+                        "titulo":"Cuarto elemento",
+                        "fechaInicio":"2024-01-01",
+                        "fechaFin":"2024-02-01"
+                    }
+                ],
+                "titulo":"Tercer elemento",
+                "fechaInicio":"2024-01-01",
+                "fechaFin":"2024-02-01"
+            }
+        ],
+        "titulo":"Primer elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-02-03"
+    },
+    
+    {
+        "id":2,
+        "hijo":[],
+        "titulo":"Segundo elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-01-01"
+    },
+    {
+        "id":6,
+        "hijo":[
+            {
+                "id":5,
+                "hijo":[],
+                "titulo":"Quinto elemento",
+                "fechaInicio":"2024-01-24",
+                "fechaFin":"2024-02-01"
+            }
+ 
+        ],
+        "titulo":"Sexto elemento",
+        "fechaInicio":"2024-01-02",
+        "fechaFin":"2024-02-16"
+    },
+    {
+        "id":8,
+        "hijo":[
+            {
+                "id":10,
+                "hijo":[],
+                "titulo":"Decimo elemento",
+                "fechaInicio":"2024-02-01",
+                "fechaFin":"2024-02-03"
+            },
+            {
+                "id":9,
+                "hijo":[],
+                "titulo":"Noveno elemento",
+                "fechaInicio":"2024-01-27",
+                "fechaFin":"2024-01-28"
+            }            
+        ],
+        "titulo":"Octavo elemento",
+        "fechaInicio":"2024-01-27",
+        "fechaFin":"2024-02-03"
+    },
+    {
+        "id":7,
+        "hijo":[],
+        "titulo":"Septimo elemento",
+        "fechaInicio":"2024-01-30",
+        "fechaFin":"2024-02-16"
+    }    
+]
