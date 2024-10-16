@@ -23,3 +23,4 @@ Solution:
 comparacion de fechas a[i] > b[j]
 
 1. recorrer toda la lista e identificar cuantos niveles hay
+2. Repito la comparacion de fechas
