@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TareasGant.Backend.props" />
+</Project>
