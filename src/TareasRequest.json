@@ -1,0 +1,80 @@
+[
+    {
+        "id":1,
+        "padre":null,
+        "titulo":"Primer elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-02-03"
+    },
+    {
+        "id":2,
+        "padre":null,
+        "titulo":"Segundo elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-01-01"
+    },
+    {
+        "id":3,
+        "padre":1,
+        "titulo":"Tercer elemento",
+        "fechaInicio":"2024-01-24",
+        "fechaFin":"2024-02-01"
+    },
+    {
+        "id":4,
+        "padre":3,
+        "titulo":"Cuarto elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-02-01"
+    },
+    {
+        "id":5,
+        "padre":6,
+        "titulo":"Quinto elemento",
+        "fechaInicio":"2024-01-24",
+        "fechaFin":"2024-02-01"
+    },
+    {
+        "id":6,
+        "padre":null,
+        "titulo":"Sexto elemento",
+        "fechaInicio":"2024-01-25",
+        "fechaFin":"2024-02-01"
+    },
+    {
+        "id":7,
+        "padre":null,
+        "titulo":"Septimo elemento",
+        "fechaInicio":"2024-01-30",
+        "fechaFin":"2024-02-16"
+    },
+    {
+        "id":8,
+        "padre":null,
+        "titulo":"Octavo elemento",
+        "fechaInicio":"2024-01-26",
+        "fechaFin":"2024-01-27"
+    },
+    {
+        "id":9,
+        "padre":8,
+        "titulo":"Noveno elemento",
+        "fechaInicio":"2024-01-27",
+        "fechaFin":"2024-01-28"
+    },
+    {
+        "id":10,
+        "padre":8,
+        "titulo":"Decimo elemento",
+        "fechaInicio":"2024-02-01",
+        "fechaFin":"2024-02-03"
+    },
+    {
+        "id":11,
+        "padre":1,
+        "titulo":"Onceavo elemento",
+        "fechaInicio":"2024-01-01",
+        "fechaFin":"2024-02-03"
+    }    
+ 
+]
