@@ -25,7 +25,7 @@ namespace TareasGant.Backend.Controllers
                 var listasPorId = listasJson.ToDictionary(e => e.Id);
                 var padres = new List<ListaJson>();
 
-                // Paso 1: Identificar padres e hijos(niveles)
+                // Paso 1: Identificar padres e hijos (niveles)
                 foreach (var lista in listasJson)
                 {
                     if (lista.Padre == null)
@@ -34,33 +34,40 @@ namespace TareasGant.Backend.Controllers
                     }
                     else if (listasPorId.TryGetValue((int)lista.Padre, out var padre))
                     {
-                        padre.Hijos.Add(lista);
+                        padre.Hijo.Add(lista);
                     }
                 }
 
-                // Paso 2: Comparar fechas
+                // Paso 2: Ordenar hijos y ajustar fechas
                 foreach (var padre in padres)
                 {
-                    CompararFechas(padre);
+                    ComparacionHijosPorFechaInicio(padre.Hijo);
+
                 }
 
                 return Ok(padres);
             }
         }
 
-        private void CompararFechas(ListaJson padre)
+        public void ComparacionHijosPorFechaInicio(List<ListaJson> hijos)
         {
-            if (!padre.Hijos.Any())
-                return;
-
-            padre.FechaInicio = padre.Hijos.Min(hijo => hijo.FechaInicio);
-            padre.FechaFin = padre.Hijos.Max(hijo => hijo.FechaFin);
-
-            foreach (var hijo in padre.Hijos)
+            int totalHijos = hijos.Count;
+            for (int HijoActual = 0; HijoActual < totalHijos - 1; HijoActual++)
             {
-                CompararFechas(hijo);
+                for (int SiguienteHijo = 0; SiguienteHijo < totalHijos - HijoActual - 1; SiguienteHijo++)
+                {
+                    if (DateTime.Parse(hijos[SiguienteHijo].FechaInicio) > DateTime.Parse(hijos[SiguienteHijo + 1].FechaInicio))
+                    {
+                        // Intercambiar hijos[SiguienteHijo] y hijos[SiguienteHijo + 1]
+                        var temp = hijos[SiguienteHijo];
+                        hijos[SiguienteHijo] = hijos[SiguienteHijo + 1];
+                        hijos[SiguienteHijo + 1] = temp;
+                    }
+                }
             }
         }
+
     }
 
 }
+
