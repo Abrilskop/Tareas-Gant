@@ -1,26 +1,106 @@
-Primer nivel : Padres
-Segundo nivel : Hijos
+# Implementación de un EndPoint para Manejar Jerarquías de Tareas en C#
 
-Padres - hijos:
-Todos los elementos que no tengan ningún padre, serán padres por default.
+## Descripción
+Este proyecto implementa un EndPoint de tipo `POST` que acepta una lista de objetos del tipo `TareaRequest` y retorna una lista de tipo `TareaResponse` organizando las tareas jerárquicamente. Las tareas con el campo `padre` en `null` son consideradas como tareas principales, y las tareas con un valor en el campo `padre` son tratadas como hijos de otras tareas.
 
-Anidación:
-Si en elemento 4(id: 4), su campo padre es 3(id:3), el elemento 4 se anida al elemento 3  
+## Requisitos
+1. **Jerarquía de Tareas**:
+   - Si el campo `padre` es `null`, la tarea es considerada como una tarea principal.
+   - Si el campo `padre` tiene un valor, esta tarea es hija de la tarea cuyo `id` coincide con el valor de `padre`.
+   
+2. **Ordenación**:
+Las tareas deben ser ordenadas de forma ascendente por el campo fechaInicio y fechaFin, una vez realizadas las modificaciones en las fechas.
 
-Fechas:
-Las fechas siempre van a ir en ascendente
-"fechaInicio": En el elemento "fechaInicio" va la menor fecha de todos los hijos.
-"fechaFin": En el elemento "fechaFin" va la mayor fecha de todos los hijos.
+3. **Ajuste de Fechas**:
+- **Fecha de Inicio**: Si una tarea hija tiene una fecha de inicio anterior a la del padre, se ajusta la fecha de inicio del padre para que sea la misma que la del hijo.
+- **Fecha de Fin**: Si una tarea hija tiene una fecha de fin posterior a la del padre, se ajusta la fecha de fin del padre para que sea la misma que la del hijo.
+4. **Profundidad de la Jerarquía**:
+   - Se debe calcular la profundidad de la jerarquía para cada tarea.
+   - Se deben crear nodos auxiliares para cada nivel de la jerarquía.
+   
+4. **Salida**:
+   - El formato de salida debe organizar las tareas principales en el primer nivel y las tareas hijas dentro de la propiedad `hijo` del objeto de respuesta.
 
-El ordenamiento de los elementos siempre se da de manera ascendente, se toma en cuenta las fechasdeinicio
+## Ejemplo del JSON de Entrada y Salida
 
-Niveles:
-Siempre empezar del ultimo nivel.
-escoje la fecha menor y fecha mayor luego las comparar con el 2do nivel
+<div style="display: flex; justify-content: space-between;">
 
-Solution:
+<div style="width: 48%;">
 
-comparacion de fechas a[i] > b[j]
+### JSON de Entrada `TareaRequest`
+```JSON
+[
+  {
+    "id": 1,
+    "padre": null,
+    "titulo": "Primer elemento",
+    "fechaInicio": "2024-01-01",
+    "fechaFin": "2024-02-03"
+  },
+  {
+    "id": 3,
+    "padre": 1,
+    "titulo": "Tercer elemento",
+    "fechaInicio": "2024-01-24",
+    "fechaFin": "2024-02-01"
+  },
+  {
+    "id": 4,
+    "padre": 3,
+    "titulo": "Cuarto elemento",
+    "fechaInicio": "2024-01-01",
+    "fechaFin": "2024-02-01"
+  }
+]
+```
+</div> <div style="width: 48%;">
 
-1. recorrer toda la lista e identificar cuantos niveles hay
-2. Repito la comparacion de fechas
+
+### JSON de Salida `TareaResponse`
+
+```JSON
+[
+  {
+    "id": 1,
+    "titulo": "Primer elemento",
+    "fechaInicio": "2024-01-01",
+    "fechaFin": "2024-02-03",
+    "hijo": [
+      {
+        "id": 3,
+        "titulo": "Tercer elemento",
+        "fechaInicio": "2024-01-24",
+        "fechaFin": "2024-02-01",
+        "hijo": [
+          {
+            "id": 4,
+            "titulo": "Cuarto elemento",
+            "fechaInicio": "2024-01-01",
+            "fechaFin": "2024-02-01",
+            "hijo": []
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+</div> </div>
+
+## Algoritmo para Organizar Tareas (en proceso)
+1. **Crear Diccionario de Tareas:** 
+
+Construir un diccionario donde la clave sea el `id` de la tarea y el valor sea la tarea misma. Esto facilita el acceso a cada tarea por su `id`.
+
+2. **Identificar Tareas Principales e Hijas:**
+
+Recorrer todas las tareas y añadirlas a sus respectivos padres si el campo `padre` tiene un valor.
+Si el campo `padre` es `null`, la tarea se añade al nivel superior de la jerarquía.
+
+3. **Ordenación de Tareas por Fecha:**
+
+Ordenar las tareas en cada nivel por el campo `fechaInicio`.
+
+4. **Calcular la Profundidad:**
+
+Utilizar una recursión para calcular qué tan profundo llega cada nivel de la jerarquía, basándose en la estructura `hijo`.
