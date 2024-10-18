@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace TareasGant.Backend.Controllers
@@ -14,15 +14,15 @@ namespace TareasGant.Backend.Controllers
                 return BadRequest("Archivo no proporcionado o vacío.");
 
             // Leer el contenido del archivo
-            using (var stream = new StreamReader(file.OpenReadStream()))
+            using (var LectorFile = new StreamReader(file.OpenReadStream()))
             {
-                var jsonContent = await stream.ReadToEndAsync();
-                var listasJson = JsonConvert.DeserializeObject<List<ListaJson>>(jsonContent);
+                var ContenidoJson = await LectorFile.ReadToEndAsync();
+                var listasJson = JsonConvert.DeserializeObject<List<ListaJson>>(ContenidoJson); // leer archivo y crear lista
 
                 if (listasJson == null || !listasJson.Any())
                     return BadRequest("El archivo no contiene listas válidas.");
 
-                var listasPorId = listasJson.ToDictionary(e => e.Id);
+                var listasPorId = listasJson.ToDictionary(item => item.Id);
                 var padres = new List<ListaJson>();
 
                 // Paso 1: Identificar padres e hijos (niveles)
@@ -41,32 +41,40 @@ namespace TareasGant.Backend.Controllers
                 // Paso 2: Ordenar hijos y ajustar fechas
                 foreach (var padre in padres)
                 {
-                    ComparacionHijosPorFechaInicio(padre.Hijo);
-
+                    BubbleSortHijosPorFechaInicio(padre.Hijo);
+                    CompararFechasDelPadre(padre);
                 }
 
                 return Ok(padres);
             }
         }
 
-        public void ComparacionHijosPorFechaInicio(List<ListaJson> hijos)
+        public void BubbleSortHijosPorFechaInicio(List<ListaJson> hijos)
         {
-            int totalHijos = hijos.Count;
-            for (int HijoActual = 0; HijoActual < totalHijos - 1; HijoActual++)
+            int n = hijos.Count;
+            for (int i = 0; i < n - 1; i++)
             {
-                for (int SiguienteHijo = 0; SiguienteHijo < totalHijos - HijoActual - 1; SiguienteHijo++)
+                for (int j = 0; j < n - i - 1; j++)
                 {
-                    if (DateTime.Parse(hijos[SiguienteHijo].FechaInicio) > DateTime.Parse(hijos[SiguienteHijo + 1].FechaInicio))
+                    if (DateTime.Parse(hijos[j].FechaInicio) > DateTime.Parse(hijos[j + 1].FechaInicio))
                     {
-                        // Intercambiar hijos[SiguienteHijo] y hijos[SiguienteHijo + 1]
-                        var temp = hijos[SiguienteHijo];
-                        hijos[SiguienteHijo] = hijos[SiguienteHijo + 1];
-                        hijos[SiguienteHijo + 1] = temp;
+                        // Intercambiar hijos[j] y hijos[j + 1]
+                        var auxiliar = hijos[j];
+                        hijos[j] = hijos[j + 1];
+                        hijos[j + 1] = auxiliar;
                     }
                 }
             }
         }
 
+        public void CompararFechasDelPadre(ListaJson padre)
+        {
+            if (padre.Hijo.Any())
+            {
+                padre.FechaInicio = padre.Hijo.Min(hijo => hijo.FechaInicio);
+                padre.FechaFin = padre.Hijo.Max(hijo => hijo.FechaFin);
+            }
+        }
     }
 
 }
