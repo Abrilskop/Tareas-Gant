@@ -51,10 +51,10 @@ namespace TareasGant.Backend.Controllers
 
         public void BubbleSortHijosPorFechaInicio(List<ListaJson> hijos)
         {
-            int n = hijos.Count;
-            for (int i = 0; i < n - 1; i++)
+            int totalHijos = hijos.Count;
+            for (int i = 0; i < totalHijos - 1; i++)
             {
-                for (int j = 0; j < n - i - 1; j++)
+                for (int j = 0; j < totalHijos - i - 1; j++)
                 {
                     if (DateTime.Parse(hijos[j].FechaInicio) > DateTime.Parse(hijos[j + 1].FechaInicio))
                     {
