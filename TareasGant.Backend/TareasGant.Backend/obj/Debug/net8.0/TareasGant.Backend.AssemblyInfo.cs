@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TareasGant.Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f23f0ec50c4f542e93d564a43fac2ec7f80fde2f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+551797f9d9d38ab06a3fddef6ff6d0782317f68d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TareasGant.Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TareasGant.Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

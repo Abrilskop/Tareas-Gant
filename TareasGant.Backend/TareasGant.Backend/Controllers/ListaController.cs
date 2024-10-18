@@ -22,7 +22,7 @@ namespace TareasGant.Backend.Controllers
                 if (listasJson == null || !listasJson.Any())
                     return BadRequest("El archivo no contiene listas válidas.");
 
-                var listasPorId = listasJson.ToDictionary(item => item.Id);
+                var listasPorId = listasJson.ToDictionary(lista=> lista.Id);
                 var padres = new List<ListaJson>();
 
                 // Paso 1: Identificar padres e hijos (niveles)
@@ -49,7 +49,7 @@ namespace TareasGant.Backend.Controllers
             }
         }
 
-        public void BubbleSortHijosPorFechaInicio(List<ListaJson> hijos)
+        private void BubbleSortHijosPorFechaInicio(List<ListaJson> hijos)
         {
             int n = hijos.Count;
             for (int i = 0; i < n - 1; i++)
@@ -67,7 +67,7 @@ namespace TareasGant.Backend.Controllers
             }
         }
 
-        public void CompararFechasDelPadre(ListaJson padre)
+        private void CompararFechasDelPadre(ListaJson padre)
         {
             if (padre.Hijo.Any())
             {

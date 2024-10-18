@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r7GO4Lw/KMw=",
+  "dgSpecHash": "Uj6L7TRNDdA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\RAMOS\\Downloads\\src\\Tareas-Gant\\TareasGant.Backend\\TareasGant.Backend\\TareasGant.Backend.csproj",
+  "projectFilePath": "C:\\Users\\RAMOS\\Source\\Repos\\Tareas-Gant\\TareasGant.Backend\\TareasGant.Backend\\TareasGant.Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\RAMOS\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\RAMOS\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
